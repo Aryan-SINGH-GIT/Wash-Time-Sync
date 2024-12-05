@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Set Timer</title>
+    <style>
+        body {
+            background-color: #f0f8ff; /* AliceBlue background */
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        .timer-input {
+            margin-bottom: 20px;
+        }
+        input {
+            padding: 10px;
+            margin: 10px;
+            font-size: 1em;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            background-color: #1e90ff; /* DodgerBlue */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #104e8b; /* Darker DodgerBlue */
+        }
+    </style>
+</head>
+<body>
+    <h1>Set Timer for Washing Machines</h1>
+    <div class="timer-input">
+        <label for="machine1">Washing Machine 1: </label>
+        <input type="text" id="machine1" placeholder="e.g., 44:00">
+    </div>
+    <div class="timer-input">
+        <label for="machine2">Washing Machine 2: </label>
+        <input type="text" id="machine2" placeholder="e.g., 30:00">
+    </div>
+    <div class="timer-input">
+        <label for="machine3">Washing Machine 3: </label>
+        <input type="text" id="machine3" placeholder="e.g., 25:00">
+    </div>
+    <div class="timer-input">
+        <label for="machine4">Washing Machine 4: </label>
+        <input type="text" id="machine4" placeholder="e.g., 20:00">
+    </div>
+    <div class="timer-input">
+        <label for="machine5">Washing Machine 5: </label>
+        <input type="text" id="machine5" placeholder="e.g., 15:00">
+    </div>
+    <div class="timer-input">
+        <label for="machine6">Washing Machine 6: </label>
+        <input type="text" id="machine6" placeholder="e.g., 10:00">
+    </div>
+    <button onclick="setTimers()">Set Timers</button>
+
+    <script>
+        function setTimers() {
+            const timers = [];
+            for (let i = 1; i <= 6; i++) {
+                const time = document.getElementById('machine' + i).value;
+                timers.push(time);
+            }
+            localStorage.setItem('washingMachineTimers', JSON.stringify(timers));
+            alert('Timers set successfully!');
+        }
+    </script>
+</body>
+</html>
