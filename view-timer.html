@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: #f0f8ff; /* AliceBlue background */
+            font-family: Arial, sans-serif;
+            color: #333; /* Text color */
+        }
+        .flex-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px; /* Adjust the gap size as needed */
+            padding: 20px;
+        }
+        .flex-item {
+            background-color: #ffffff; /* White background for items */
+            border: 2px solid #1e90ff; /* DodgerBlue border */
+            border-radius: 10px;
+            padding: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 150px; /* Adjust the width to fit your design */
+        }
+        .flex-item img {
+            height: 50px;
+            width: 50px;
+        }
+        .timer {
+            margin-top: 10px;
+            font-size: 1.2em;
+            color: #1e90ff; /* DodgerBlue text */
+        }
+        .message {
+            color: #1e90ff; /* DodgerBlue message */
+            margin-top: 10px;
+            font-size: 1em;
+        }
+    </style>
+</head>
+<body>
+    <center>
+        <h1>Washing Machine Status</h1>
+        <div class="flex-container">
+            <div class="flex-item">
+                <img src="png-transparent-washing-machine-cartoon-washing-machine.png" alt="Washing Machine">
+                <div class="timer">44:00</div>
+            </div>
+            <div class="flex-item">
+                <img src="png-transparent-washing-machine-cartoon-washing-machine.png" alt="Washing Machine">
+                <div class="timer">44:00</div>
+            </div>
+            <div class="flex-item">
+                <img src="png-transparent-washing-machine-cartoon-washing-machine.png" alt="Washing Machine">
+                <div class="timer">44:00</div>
+            </div>
+            <div class="flex-item">
+                <img src="png-transparent-washing-machine-cartoon-washing-machine.png" alt="Washing Machine">
+                <div class="timer">44:00</div>
+            </div>
+            <div class="flex-item">
+                <img src="png-transparent-washing-machine-cartoon-washing-machine.png" alt="Washing Machine">
+                <div class="timer">44:00</div>
+            </div>
+            <div class="flex-item">
+                <img src="png-transparent-washing-machine-cartoon-washing-machine.png" alt="Washing Machine">
+                <div class="timer">00:10</div>
+            </div>
+        </div>
+    </center>
+    <script>
+        function startCountdown(timerElement, duration) {
+            let timer = duration, minutes, seconds;
+            const interval = setInterval(function () {
+                minutes = parseInt(timer / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                timerElement.textContent = minutes + ":" + seconds;
+
+                if (--timer < 0) {
+                    timer = 0;
+                    clearInterval(interval);  // Stop the countdown
+                    let message = document.createElement("p");
+                    message.className = "message";
+                    message.innerText = "The washing machine is now available for use!";
+                    timerElement.parentElement.appendChild(message);
+                }
+            }, 1000);
+        }
+
+        // Convert time string (MM:SS) to total seconds
+        function getTimeInSeconds(timeString) {
+            const [minutes, seconds] = timeString.split(":").map(Number);
+            return minutes * 60 + seconds;
+        }
+
+        // Initialize all countdowns
+        document.querySelectorAll('.timer').forEach(function(timerElement) {
+            const initialTime = timerElement.textContent;
+            if (initialTime !== "00:00") {
+                startCountdown(timerElement, getTimeInSeconds(initialTime));
+            } else {
+                // Immediately show the message for any timer starting at 00:00
+                let message = document.createElement("p");
+                message.className = "message";
+                message.innerText = "The washing machine is now empty and ready for use!";
+                timerElement.parentElement.appendChild(message);
+            }
+        });
+    </script>
+</body>
+</html>
